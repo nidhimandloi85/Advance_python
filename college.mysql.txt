@@ -1,0 +1,113 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 14
+Server version: 8.0.30 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| rays               |
+| student            |
+| sys                |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> use rays
+Database changed
+mysql> create table college(collegeid int primary key,collegename varchar(95),city varchar(50),university varchar(100),contactno int);
+ERROR 1050 (42S01): Table 'college' already exists
+mysql> drop table college;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table college(collegeid int primary key,collegename varchar(95),city varchar(50),university varchar(100),contactno int);
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> show  tables;
++----------------+
+| Tables_in_rays |
++----------------+
+| college        |
+| employee       |
++----------------+
+2 rows in set (0.00 sec)
+
+mysql> insert info college values(1,'holkar','indore','davv',4567392619);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'college values(1,'holkar','indore','davv',4567392619)' at line 1
+mysql> insert into college values(1,'holkar','indore','davv',4567392619);
+ERROR 1264 (22003): Out of range value for column 'contactno' at row 1
+mysql> create table college(collegeid int primary key,collegename varchar(95),city varchar(50),university varchar(100),contactno varchar(90);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> create table college(collegeid int primary key,collegename varchar(95),city varchar(50),university varchar(100),contactno varchar(90));
+ERROR 1050 (42S01): Table 'college' already exists
+mysql> drop table college;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_rays |
++----------------+
+| employee       |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> create table college(collegeid int primary key,collegename varchar(95),city varchar(50),university varchar(100),contactno varchar(90));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into college values(1,"holkar","indore","davv",2938475610);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into college values(2,"medicaps","indore","RGPV",1234567890);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into college values(3,"sage","indore","RGPV",1234123434);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_rays |
++----------------+
+| college        |
+| employee       |
++----------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from college;
++-----------+-------------+--------+------------+------------+
+| collegeid | collegename | city   | university | contactno  |
++-----------+-------------+--------+------------+------------+
+|         1 | holkar      | indore | davv       | 2938475610 |
+|         2 | medicaps    | indore | RGPV       | 1234567890 |
+|         3 | sage        | indore | RGPV       | 1234123434 |
++-----------+-------------+--------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select *  from college where collegename='medicaps';
++-----------+-------------+--------+------------+------------+
+| collegeid | collegename | city   | university | contactno  |
++-----------+-------------+--------+------------+------------+
+|         2 | medicaps    | indore | RGPV       | 1234567890 |
++-----------+-------------+--------+------------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from  college where university='RGPV';
++-----------+-------------+--------+------------+------------+
+| collegeid | collegename | city   | university | contactno  |
++-----------+-------------+--------+------------+------------+
+|         2 | medicaps    | indore | RGPV       | 1234567890 |
+|         3 | sage        | indore | RGPV       | 1234123434 |
++-----------+-------------+--------+------------+------------+
+2 rows in set (0.00 sec)
+
+mysql> C:\Users\Nidhi\Desktop\employee.mysql.txt
