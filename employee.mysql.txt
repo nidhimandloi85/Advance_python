@@ -1,0 +1,174 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.30 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| rays               |
+| student            |
+| sys                |
++--------------------+
+6 rows in set (0.03 sec)
+
+mysql> drop database rays;
+Query OK, 1 row affected (0.04 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| student            |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> create database rays;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> create table employee(id int primary key ,name varchar(45),company varchar(45),salary int);
+ERROR 1046 (3D000): No database selected
+mysql> create table employee(id int primary key ,name varchar(45),company varchar(45),salary int);
+ERROR 1046 (3D000): No database selected
+mysql> use rays;
+Database changed
+mysql> create table employee(id int primary key ,name varchar(45),company varchar(45),salary int);
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_rays |
++----------------+
+| employee       |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> insert into employee values(1,"nidhi',,"ncs",12000);
+    ">
+    ">
+    "> insert into employee values(1,"nidhi',,"ncs",12000);
+    '>
+    '> insert into employee values(1,"nidhi',"ncs",12000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ncs",12000);
+
+
+insert into employee values(1,"nidhi',,"ncs",12000);
+
+insert int' at line 1
+mysql> insert into employee values(1,"nidhi","ncs",12000);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into employee values(1,"harshit","tcs",50000);
+ERROR 1062 (23000): Duplicate entry '1' for key 'employee.PRIMARY'
+mysql> insert into employee values(2,"harshit","tcs",50000);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into employee values(2,"vikash","hcl",40000);
+ERROR 1062 (23000): Duplicate entry '2' for key 'employee.PRIMARY'
+mysql> insert into employee values(3,"vikash","hcl",40000);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> update employee set company="lnt" where id =3;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++----+---------+---------+--------+
+| id | name    | company | salary |
++----+---------+---------+--------+
+|  1 | nidhi   | ncs     |  12000 |
+|  2 | harshit | tcs     |  50000 |
+|  3 | vikash  | lnt     |  40000 |
++----+---------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> update employee set salary=100000 where id =1
+    -> update employee set salary=100000 where id =1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'update employee set salary=100000 where id =1' at line 2
+mysql> update employee set salary="100000" where id =1;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++----+---------+---------+--------+
+| id | name    | company | salary |
++----+---------+---------+--------+
+|  1 | nidhi   | ncs     | 100000 |
+|  2 | harshit | tcs     |  50000 |
+|  3 | vikash  | lnt     |  40000 |
++----+---------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> insert into employee values(4,"amit","info",800000);
+Query OK, 1 row affected (0.22 sec)
+
+mysql> select * from employee;
++----+---------+---------+--------+
+| id | name    | company | salary |
++----+---------+---------+--------+
+|  1 | nidhi   | ncs     | 100000 |
+|  2 | harshit | tcs     |  50000 |
+|  3 | vikash  | lnt     |  40000 |
+|  4 | amit    | info    | 800000 |
++----+---------+---------+--------+
+4 rows in set (0.00 sec)
+
+mysql> delete frome employee  where id =4;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'employee  where id =4' at line 1
+mysql> delete frome employee  where id ='4';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'employee  where id ='4'' at line 1
+mysql> delete frome employee  where id ='4';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'employee  where id ='4'' at line 1
+mysql> delete frome employee  where id ='4';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'employee  where id ='4'' at line 1
+mysql> delete from employee  where id ='4';
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from employee;
++----+---------+---------+--------+
+| id | name    | company | salary |
++----+---------+---------+--------+
+|  1 | nidhi   | ncs     | 100000 |
+|  2 | harshit | tcs     |  50000 |
+|  3 | vikash  | lnt     |  40000 |
++----+---------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee where name="nidhi"
+    -> select * from employee where name="nidhi";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select * from employee where name="nidhi"' at line 2
+mysql> select * from employee where name='nidhi';
++----+-------+---------+--------+
+| id | name  | company | salary |
++----+-------+---------+--------+
+|  1 | nidhi | ncs     | 100000 |
++----+-------+---------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee order by salary DESC;
++----+---------+---------+--------+
+| id | name    | company | salary |
++----+---------+---------+--------+
+|  1 | nidhi   | ncs     | 100000 |
+|  2 | harshit | tcs     |  50000 |
+|  3 | vikash  | lnt     |  40000 |
++----+---------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql>
