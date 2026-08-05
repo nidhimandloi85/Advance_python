@@ -1,0 +1,138 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 16
+Server version: 8.0.30 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| rays               |
+| student            |
+| sys                |
+| testdemo           |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use testdemo;
+Database changed
+mysql> show tables;
++--------------------+
+| Tables_in_testdemo |
++--------------------+
+| department         |
+| employee           |
+| exam               |
+| marks              |
+| student            |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from student;
++--------+----------+
+| rollno | name     |
++--------+----------+
+|    101 | nidhi    |
+|    102 | priya    |
+|    103 | asvini   |
+|    104 | harshita |
+|    107 | ravi     |
++--------+----------+
+5 rows in set (0.00 sec)
+
+mysql> selct * from marks;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selct * from marks' at line 1
+mysql> select * from marks;
++--------+-------+
+| rollno | marks |
++--------+-------+
+|    101 |    45 |
+|    102 |    55 |
+|    103 |    78 |
+|    105 |    87 |
+|    106 |    95 |
++--------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from student inner join marks on student.rollno=marks.rollno;
++--------+--------+--------+-------+
+| rollno | name   | rollno | marks |
++--------+--------+--------+-------+
+|    101 | nidhi  |    101 |    45 |
+|    102 | priya  |    102 |    55 |
+|    103 | asvini |    103 |    78 |
++--------+--------+--------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select student.name,marks.marks from student inner join marks on student.rollno=marks.rollno;
++--------+-------+
+| name   | marks |
++--------+-------+
+| nidhi  |    45 |
+| priya  |    55 |
+| asvini |    78 |
++--------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from student left  join marks on student.rollno=marks.rollno;
++--------+----------+--------+-------+
+| rollno | name     | rollno | marks |
++--------+----------+--------+-------+
+|    101 | nidhi    |    101 |    45 |
+|    102 | priya    |    102 |    55 |
+|    103 | asvini   |    103 |    78 |
+|    104 | harshita |   NULL |  NULL |
+|    107 | ravi     |   NULL |  NULL |
++--------+----------+--------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select student.name,marks.marks from student left join marks on student.rollno=marks.rollno;
++----------+-------+
+| name     | marks |
++----------+-------+
+| nidhi    |    45 |
+| priya    |    55 |
+| asvini   |    78 |
+| harshita |  NULL |
+| ravi     |  NULL |
++----------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select student.name,marks.marks from student right join marks on student.rollno=marks.rollno;
++--------+-------+
+| name   | marks |
++--------+-------+
+| nidhi  |    45 |
+| priya  |    55 |
+| asvini |    78 |
+| NULL   |    87 |
+| NULL   |    95 |
++--------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select student.name,marks.marks from student left join marks on student.rollno=marks.rollno union select student.name,marks.marks from student right join marks on student.rollno=marks.rollno;
++----------+-------+
+| name     | marks |
++----------+-------+
+| nidhi    |    45 |
+| priya    |    55 |
+| asvini   |    78 |
+| harshita |  NULL |
+| ravi     |  NULL |
+| NULL     |    87 |
+| NULL     |    95 |
++----------+-------+
+7 rows in set (0.02 sec)
+
+mysql>
