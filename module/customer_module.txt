@@ -1,0 +1,202 @@
+nter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 77
+Server version: 8.0.30 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| rays               |
+| student            |
+| sys                |
+| testdemo           |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use testdemo;
+Database changed
+mysql> show tables;
++--------------------+
+| Tables_in_testdemo |
++--------------------+
+| department         |
+| employee           |
+| exam               |
+| marks              |
+| student            |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> create table customer(customerid int primary key,customername varchar(45),email varchar(100),phonenumber varchar(50),address varchar(80));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into customer values(101,'sneha','sneha@gmail.com12','2345678970','kgn');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into customer values(102,'mushkan','mushkan@gmail.com23','7869402513','kashravad');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into customer values(103,'pragya','pragya@gmail.com34','7024185479','indore');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into customer values(104,'krishna','krishna@gmail.com56','9303097989','singun');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from customer;
++------------+--------------+---------------------+-------------+-----------+
+| customerid | customername | email               | phonenumber | address   |
++------------+--------------+---------------------+-------------+-----------+
+|        101 | sneha        | sneha@gmail.com12   | 2345678970  | kgn       |
+|        102 | mushkan      | mushkan@gmail.com23 | 7869402513  | kashravad |
+|        103 | pragya       | pragya@gmail.com34  | 7024185479  | indore    |
+|        104 | krishna      | krishna@gmail.com56 | 9303097989  | singun    |
++------------+--------------+---------------------+-------------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> update customer set phonenumber='7049303097' where customerid=101;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from customer;
++------------+--------------+---------------------+-------------+-----------+
+| customerid | customername | email               | phonenumber | address   |
++------------+--------------+---------------------+-------------+-----------+
+|        101 | sneha        | sneha@gmail.com12   | 7049303097  | kgn       |
+|        102 | mushkan      | mushkan@gmail.com23 | 7869402513  | kashravad |
+|        103 | pragya       | pragya@gmail.com34  | 7024185479  | indore    |
+|        104 | krishna      | krishna@gmail.com56 | 9303097989  | singun    |
++------------+--------------+---------------------+-------------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> select * from customer where customername='pragya';
++------------+--------------+--------------------+-------------+---------+
+| customerid | customername | email              | phonenumber | address |
++------------+--------------+--------------------+-------------+---------+
+|        103 | pragya       | pragya@gmail.com34 | 7024185479  | indore  |
++------------+--------------+--------------------+-------------+---------+
+1 row in set (0.00 sec)
+
+mysql> select * from customer where customername like='%r';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '='%r'' at line 1
+mysql> select * from customer where customername like 'r%';
+Empty set (0.00 sec)
+
+mysql> select * from customer where customername like '%a';
++------------+--------------+---------------------+-------------+---------+
+| customerid | customername | email               | phonenumber | address |
++------------+--------------+---------------------+-------------+---------+
+|        101 | sneha        | sneha@gmail.com12   | 7049303097  | kgn     |
+|        103 | pragya       | pragya@gmail.com34  | 7024185479  | indore  |
+|        104 | krishna      | krishna@gmail.com56 | 9303097989  | singun  |
++------------+--------------+---------------------+-------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from customer where customername like '%a%';
++------------+--------------+---------------------+-------------+-----------+
+| customerid | customername | email               | phonenumber | address   |
++------------+--------------+---------------------+-------------+-----------+
+|        101 | sneha        | sneha@gmail.com12   | 7049303097  | kgn       |
+|        102 | mushkan      | mushkan@gmail.com23 | 7869402513  | kashravad |
+|        103 | pragya       | pragya@gmail.com34  | 7024185479  | indore    |
+|        104 | krishna      | krishna@gmail.com56 | 9303097989  | singun    |
++------------+--------------+---------------------+-------------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> select * from customer limit 1,3;
++------------+--------------+---------------------+-------------+-----------+
+| customerid | customername | email               | phonenumber | address   |
++------------+--------------+---------------------+-------------+-----------+
+|        102 | mushkan      | mushkan@gmail.com23 | 7869402513  | kashravad |
+|        103 | pragya       | pragya@gmail.com34  | 7024185479  | indore    |
+|        104 | krishna      | krishna@gmail.com56 | 9303097989  | singun    |
++------------+--------------+---------------------+-------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from customer limit 0,3;
++------------+--------------+---------------------+-------------+-----------+
+| customerid | customername | email               | phonenumber | address   |
++------------+--------------+---------------------+-------------+-----------+
+|        101 | sneha        | sneha@gmail.com12   | 7049303097  | kgn       |
+|        102 | mushkan      | mushkan@gmail.com23 | 7869402513  | kashravad |
+|        103 | pragya       | pragya@gmail.com34  | 7024185479  | indore    |
++------------+--------------+---------------------+-------------+-----------+
+3 rows in set (0.02 sec)
+
+mysql> select * from customer limit 2,1;
++------------+--------------+--------------------+-------------+---------+
+| customerid | customername | email              | phonenumber | address |
++------------+--------------+--------------------+-------------+---------+
+|        103 | pragya       | pragya@gmail.com34 | 7024185479  | indore  |
++------------+--------------+--------------------+-------------+---------+
+1 row in set (0.00 sec)
+
+mysql> select * from customer limit 2,4;
++------------+--------------+---------------------+-------------+---------+
+| customerid | customername | email               | phonenumber | address |
++------------+--------------+---------------------+-------------+---------+
+|        103 | pragya       | pragya@gmail.com34  | 7024185479  | indore  |
+|        104 | krishna      | krishna@gmail.com56 | 9303097989  | singun  |
++------------+--------------+---------------------+-------------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from customer order by customerid DESC limit 2,4;
++------------+--------------+---------------------+-------------+-----------+
+| customerid | customername | email               | phonenumber | address   |
++------------+--------------+---------------------+-------------+-----------+
+|        102 | mushkan      | mushkan@gmail.com23 | 7869402513  | kashravad |
+|        101 | sneha        | sneha@gmail.com12   | 7049303097  | kgn       |
++------------+--------------+---------------------+-------------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> select * from customer order by customerid DESC limit 0,4;
++------------+--------------+---------------------+-------------+-----------+
+| customerid | customername | email               | phonenumber | address   |
++------------+--------------+---------------------+-------------+-----------+
+|        104 | krishna      | krishna@gmail.com56 | 9303097989  | singun    |
+|        103 | pragya       | pragya@gmail.com34  | 7024185479  | indore    |
+|        102 | mushkan      | mushkan@gmail.com23 | 7869402513  | kashravad |
+|        101 | sneha        | sneha@gmail.com12   | 7049303097  | kgn       |
++------------+--------------+---------------------+-------------+-----------+
+4 rows in set (0.02 sec)
+
+mysql> select * from customer order by customerid DESC limit 0,3;
++------------+--------------+---------------------+-------------+-----------+
+| customerid | customername | email               | phonenumber | address   |
++------------+--------------+---------------------+-------------+-----------+
+|        104 | krishna      | krishna@gmail.com56 | 9303097989  | singun    |
+|        103 | pragya       | pragya@gmail.com34  | 7024185479  | indore    |
+|        102 | mushkan      | mushkan@gmail.com23 | 7869402513  | kashravad |
++------------+--------------+---------------------+-------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql>
+mysql> select * from customer order by customerid DESC limit 0,2;
++------------+--------------+---------------------+-------------+---------+
+| customerid | customername | email               | phonenumber | address |
++------------+--------------+---------------------+-------------+---------+
+|        104 | krishna      | krishna@gmail.com56 | 9303097989  | singun  |
+|        103 | pragya       | pragya@gmail.com34  | 7024185479  | indore  |
++------------+--------------+---------------------+-------------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from customer order by customerid DESC limit 0,1;
++------------+--------------+---------------------+-------------+---------+
+| customerid | customername | email               | phonenumber | address |
++------------+--------------+---------------------+-------------+---------+
+|        104 | krishna      | krishna@gmail.com56 | 9303097989  | singun  |
++------------+--------------+---------------------+-------------+---------+
+1 row in set (0.00 sec)
+
+mysql>
